@@ -53,5 +53,57 @@ class BSTTest {
         assertEquals(3, bst.root.left.value);
         assertEquals(null, bst.root.left.right);
     }
+    @Test
+    void testSearch() {
+        BST bst = new BST();
+        bst.insert(5);
+        bst.insert(3);
+        bst.insert(7);
+        
+        assertTrue(bst.search(3));
+        assertTrue(bst.search(5));
+        assertTrue(bst.search(7));
+        assertFalse(bst.search(4));
+        assertFalse(bst.search(8));
+    }
 
+    @Test
+    void testUpdate() {
+        BST bst = new BST();
+        bst.insert(5);
+        bst.insert(3);
+        bst.insert(7);
+        
+        bst.update(3, 4);
+        assertEquals("4 5 7 ", bst.inOrder());
+        bst.update(5, 6);
+        assertEquals("4 6 7 ", bst.inOrder());
+    }
+
+    @Test
+    void testLowestCommonAncestor() {
+        BST bst = new BST();
+        bst.insert(5);
+        bst.insert(3);
+        bst.insert(7);
+        bst.insert(2);
+        bst.insert(4);
+        bst.insert(6);
+        bst.insert(8);
+    
+        assertEquals(5, bst.lowestCommonAncestor(2, 8).value);
+        assertEquals(3, bst.lowestCommonAncestor(2, 4).value);
+        assertEquals(5, bst.lowestCommonAncestor(3, 7).value);
+        assertEquals(3, bst.lowestCommonAncestor(2, 3).value);
+    }
+    
+    @Test
+    void testSortedArrayToBST() {
+        int[] arr = {1, 2, 3, 4, 5, 6, 7};
+        BST.Node root = BST.sortedArrayToBST(arr);
+        assertEquals(4, root.value);
+        assertEquals(2, root.left.value);
+        assertEquals(6, root.right.value);
+    }
 }
+
